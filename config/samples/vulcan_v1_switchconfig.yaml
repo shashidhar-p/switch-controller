@@ -1,0 +1,9 @@
+apiVersion: vulcan.vulcan/v1
+kind: SwitchConfig
+metadata:
+  labels:
+    app.kubernetes.io/name: switch-controller
+    app.kubernetes.io/managed-by: kustomize
+  name: switchconfig-sample
+spec:
+  # TODO(user): Add fields here

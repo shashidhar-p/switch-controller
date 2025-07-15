@@ -1,0 +1,79 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: switchconfigs.vulcan.vulcan
+spec:
+  group: vulcan.vulcan
+  names:
+    kind: SwitchConfig
+    listKind: SwitchConfigList
+    plural: switchconfigs
+    singular: switchconfig
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        description: SwitchConfig is the Schema for the switchconfigs API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: spec defines the desired state of SwitchConfig
+            properties:
+              config:
+                description: Config is the switch configuration commands or script
+                minLength: 1
+                type: string
+              sshPassword:
+                description: SSHPassword is the password for SSH login (use Secret
+                  in production)
+                minLength: 1
+                type: string
+              sshUser:
+                description: SSHUser is the username used for SSH authentication
+                minLength: 1
+                type: string
+              switchIP:
+                description: SwitchIP is the address of the switch
+                pattern: ^([0-9]{1,3}\.){3}[0-9]{1,3}$
+                type: string
+            required:
+            - config
+            - sshPassword
+            - sshUser
+            - switchIP
+            type: object
+          status:
+            description: status defines the observed state of SwitchConfig
+            properties:
+              message:
+                type: string
+              phase:
+                type: string
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

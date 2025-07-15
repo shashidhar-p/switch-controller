@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- vulcan_v1_switchconfig.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
